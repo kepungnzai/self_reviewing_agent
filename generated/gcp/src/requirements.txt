@@ -1,0 +1,2 @@
+# No external dependencies required.
+# The functions-framework is provided by the GCP Cloud Functions runtime.
