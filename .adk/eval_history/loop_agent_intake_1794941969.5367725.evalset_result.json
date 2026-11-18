@@ -1,0 +1,80 @@
+{
+  "eval_set_result_id": "loop_agent_intake_1794941969.5367725",
+  "eval_set_result_name": "loop_agent_intake_1794941969.5367725",
+  "eval_set_id": "intake",
+  "eval_case_results": [
+    {
+      "eval_set_file": "intake",
+      "eval_set_id": "intake",
+      "eval_id": "no_provider_defaults_gcp",
+      "final_eval_status": 2,
+      "eval_metric_results": null,
+      "overall_eval_metric_results": [],
+      "eval_metric_result_per_invocation": [],
+      "session_id": "___eval___session___4174fd83-6283-4c18-b3d9-c99a405f1f16",
+      "session_details": null,
+      "user_id": "eval_user"
+    },
+    {
+      "eval_set_file": "intake",
+      "eval_set_id": "intake",
+      "eval_id": "scope_creep_injection",
+      "final_eval_status": 2,
+      "eval_metric_results": null,
+      "overall_eval_metric_results": [],
+      "eval_metric_result_per_invocation": [],
+      "session_id": "___eval___session___484b476a-2992-42d0-a9cb-19e5442ca9dc",
+      "session_details": null,
+      "user_id": "eval_user"
+    },
+    {
+      "eval_set_file": "intake",
+      "eval_set_id": "intake",
+      "eval_id": "explicit_aws",
+      "final_eval_status": 2,
+      "eval_metric_results": null,
+      "overall_eval_metric_results": [],
+      "eval_metric_result_per_invocation": [],
+      "session_id": "___eval___session___9b218f61-f200-4714-ba39-bc3050032540",
+      "session_details": null,
+      "user_id": "eval_user"
+    },
+    {
+      "eval_set_file": "intake",
+      "eval_set_id": "intake",
+      "eval_id": "explicit_gcp_long_name",
+      "final_eval_status": 2,
+      "eval_metric_results": null,
+      "overall_eval_metric_results": [],
+      "eval_metric_result_per_invocation": [],
+      "session_id": "___eval___session___1eb5506d-2c7f-4926-94af-a4aa2f5ffca1",
+      "session_details": null,
+      "user_id": "eval_user"
+    },
+    {
+      "eval_set_file": "intake",
+      "eval_set_id": "intake",
+      "eval_id": "multi_provider_first_wins",
+      "final_eval_status": 2,
+      "eval_metric_results": null,
+      "overall_eval_metric_results": [],
+      "eval_metric_result_per_invocation": [],
+      "session_id": "___eval___session___8c8db907-6fa2-4187-9336-08dd7e476cd6",
+      "session_details": null,
+      "user_id": "eval_user"
+    },
+    {
+      "eval_set_file": "intake",
+      "eval_set_id": "intake",
+      "eval_id": "explicit_azure",
+      "final_eval_status": 2,
+      "eval_metric_results": null,
+      "overall_eval_metric_results": [],
+      "eval_metric_result_per_invocation": [],
+      "session_id": "___eval___session___662442e3-73a1-46ae-928c-7e26a4d5a6e4",
+      "session_details": null,
+      "user_id": "eval_user"
+    }
+  ],
+  "creation_timestamp": 1794941969.5367725
+}

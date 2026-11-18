@@ -1,0 +1,130 @@
+{
+  "eval_set_id": "release",
+  "name": "release note grounding",
+  "description": "Release manager must report only what the state says, incl. honest 'nothing changed' and 'not approved'.",
+  "eval_cases": [
+    {
+      "eval_id": "approved_after_reversal",
+      "conversation": [
+        {
+          "invocation_id": "approved_after_reversal-1",
+          "user_content": {
+            "parts": [
+              {
+                "text": "Write the delivery note."
+              }
+            ],
+            "role": "user"
+          },
+          "final_response": {
+            "parts": [
+              {
+                "text": "Outcome: the reviewer approved the delivery on GCP after 3 iterations; GCP was a default because no provider was named. Reassessment changed two decisions: hosting moved from GKE Autopilot to Cloud Run (reversed as too costly and heavy), and the Cloud Run service account lost its roles/editor role. Terraform was kept. Final architecture: one Cloud Run service scaling to zero, provisioned with Terraform, public invoker, service account without project roles. Next step: follow the README.md for deploy and teardown."
+              }
+            ],
+            "role": "model"
+          },
+          "intermediate_data": {
+            "tool_uses": [],
+            "intermediate_responses": []
+          }
+        }
+      ],
+      "session_input": {
+        "app_name": "release_eval",
+        "user_id": "eval_user",
+        "state": {
+          "target_cloud": "gcp",
+          "cloud_assumed": true,
+          "approved": true,
+          "iteration": 3,
+          "adr": "# ADR\n## Context\nHello world at lowest cost.\n## Decision\nCloud Run (min instances 0) with Terraform; service account has no project roles; public invoker.\n## Alternatives considered\nGKE Autopilot, Cloud Functions gen2, Compute Engine VM.\n## Consequences\nScales to zero.\n## Open risks\nCold starts.",
+          "decision_log_text": "[iter 1] architect  PROPOSED  Host on GKE Autopilot -- Familiar and scalable\n[iter 1] architect  PROPOSED  Provision with Terraform -- Declarative, easy teardown\n[iter 1] reviewer   REVERSE   Host on GKE Autopilot -- Per-pod billing and cluster overhead are excessive for a static greeting\n[iter 1] reviewer   KEEP      Provision with Terraform -- gcloud scripts lack state and clean teardown\n[iter 2] architect  REVERSED  Host on Cloud Run instead of GKE Autopilot -- Reviewer item 1: scale to zero removes idle cost\n[iter 2] architect  RETAINED  Provision with Terraform -- Reviewer kept it\n[iter 2] reviewer   REVISE    Cloud Run service account roles -- Account had roles/editor; it must have none\n[iter 3] architect  REVISED   Cloud Run service account roles -- Removed roles/editor per reviewer item 1\n[iter 3] reviewer   KEEP      Host on Cloud Run instead of GKE Autopilot -- Cloud Functions gen2 adds nothing",
+          "review_feedback": "VERDICT: APPROVED Everything is consistent."
+        }
+      }
+    },
+    {
+      "eval_id": "not_approved_out_of_iterations",
+      "conversation": [
+        {
+          "invocation_id": "not_approved_out_of_iterations-1",
+          "user_content": {
+            "parts": [
+              {
+                "text": "Write the delivery note."
+              }
+            ],
+            "role": "user"
+          },
+          "final_response": {
+            "parts": [
+              {
+                "text": "Outcome: the loop ran out of iterations after 3 passes without reviewer approval. Open items: (1) the README teardown omits the Terraform state bucket (coder); (2) the design lists a Cloud Monitoring alert policy that is not in the ADR (designer). Reassessment changed nothing: the Cloud Run decision was kept throughout. Final architecture: Cloud Run with Terraform on GCP. Next step: see README.md for deploy and teardown, and resolve the open items first."
+              }
+            ],
+            "role": "model"
+          },
+          "intermediate_data": {
+            "tool_uses": [],
+            "intermediate_responses": []
+          }
+        }
+      ],
+      "session_input": {
+        "app_name": "release_eval",
+        "user_id": "eval_user",
+        "state": {
+          "target_cloud": "gcp",
+          "cloud_assumed": false,
+          "approved": false,
+          "iteration": 3,
+          "adr": "# ADR\n## Context\nHello world at lowest cost.\n## Decision\nCloud Run with Terraform.\n## Alternatives considered\nCloud Functions gen2, GKE, VM.\n## Consequences\nScales to zero.\n## Open risks\nCold starts.",
+          "decision_log_text": "[iter 1] architect  PROPOSED  Host on Cloud Run -- Scale to zero\n[iter 1] reviewer   KEEP      Host on Cloud Run -- Cloud Functions gen2 adds nothing\n[iter 2] architect  RETAINED  Host on Cloud Run -- No objection\n[iter 3] architect  RETAINED  Host on Cloud Run -- No objection",
+          "review_feedback": "VERDICT: CHANGES REQUESTED\n1. [coder] The README teardown omits the Terraform state bucket.\n2. [designer] The design lists a Cloud Monitoring alert policy that is not in the ADR."
+        }
+      }
+    },
+    {
+      "eval_id": "approved_nothing_changed",
+      "conversation": [
+        {
+          "invocation_id": "approved_nothing_changed-1",
+          "user_content": {
+            "parts": [
+              {
+                "text": "Write the delivery note."
+              }
+            ],
+            "role": "user"
+          },
+          "final_response": {
+            "parts": [
+              {
+                "text": "Outcome: approved by the reviewer after 2 iterations on GCP, which was defaulted. Reassessment changed nothing: every decision was kept, and the Cloud Run choice survived the reviewer's challenge. Final architecture: Cloud Run with Terraform. Next step: follow README.md for deploy and teardown."
+              }
+            ],
+            "role": "model"
+          },
+          "intermediate_data": {
+            "tool_uses": [],
+            "intermediate_responses": []
+          }
+        }
+      ],
+      "session_input": {
+        "app_name": "release_eval",
+        "user_id": "eval_user",
+        "state": {
+          "target_cloud": "gcp",
+          "cloud_assumed": true,
+          "approved": true,
+          "iteration": 2,
+          "adr": "# ADR\n## Context\nHello world at lowest cost.\n## Decision\nCloud Run with Terraform.\n## Alternatives considered\nCloud Functions gen2, GKE, VM.\n## Consequences\nScales to zero.\n## Open risks\nCold starts.",
+          "decision_log_text": "[iter 1] architect  PROPOSED  Host on Cloud Run -- Scale to zero\n[iter 1] reviewer   KEEP      Host on Cloud Run -- Cloud Functions gen2 adds nothing\n[iter 2] architect  RETAINED  Host on Cloud Run -- No objection\n[iter 2] reviewer   KEEP      Host on Cloud Run -- Still the simplest option",
+          "review_feedback": "VERDICT: APPROVED Simplest option."
+        }
+      }
+    }
+  ]
+}

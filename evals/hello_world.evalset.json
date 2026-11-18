@@ -1,0 +1,34 @@
+{
+  "eval_set_id": "hello_world",
+  "name": "hello world smoke test",
+  "description": "No provider named, so intake should default to gcp and mark it as assumed.",
+  "eval_cases": [
+    {
+      "eval_id": "no_provider_defaults_to_gcp",
+      "conversation": [
+        {
+          "invocation_id": "inv-1",
+          "user_content": {
+            "parts": [{ "text": "Build a hello world web service." }],
+            "role": "user"
+          },
+          "final_response": {
+            "parts": [{ "text": "Delivery note for a hello world service on GCP." }],
+            "role": "model"
+          },
+          "intermediate_data": {
+            "tool_uses": [
+              { "name": "set_target_cloud", "args": { "cloud": "gcp", "assumed": true } }
+            ],
+            "intermediate_responses": []
+          }
+        }
+      ],
+      "session_input": {
+        "app_name": "loop_agent",
+        "user_id": "eval_user",
+        "state": {}
+      }
+    }
+  ]
+}

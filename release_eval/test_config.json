@@ -1,0 +1,48 @@
+{
+  "criteria": {
+    "final_response_match_v2": {
+      "threshold": 0.8
+    },
+    "rubric_based_final_response_quality_v1": {
+      "threshold": 0.8,
+      "rubrics": [
+        {
+          "rubric_id": "length",
+          "rubric_content": {
+            "text_property": "The response is under 250 words."
+          }
+        },
+        {
+          "rubric_id": "structure",
+          "rubric_content": {
+            "text_property": "The response covers, in order: the outcome, what reassessment changed, the final architecture in at most five lines, and a next step."
+          }
+        },
+        {
+          "rubric_id": "next_step",
+          "rubric_content": {
+            "text_property": "The next step points to README.md for deploy and teardown."
+          }
+        },
+        {
+          "rubric_id": "grounded",
+          "rubric_content": {
+            "text_property": "Every fact in the response appears in the provided ADR, decision log or reviewer feedback; nothing is invented."
+          }
+        },
+        {
+          "rubric_id": "honest_outcome",
+          "rubric_content": {
+            "text_property": "If the run was not approved, the response says the loop ran out of iterations and lists the open reviewer items. If it was approved, it does not claim the loop ran out of iterations."
+          }
+        },
+        {
+          "rubric_id": "honest_changes",
+          "rubric_content": {
+            "text_property": "If the decision log shows no REVISE/REVERSE/REVISED/REVERSED entries, the response says plainly that nothing changed; otherwise it gives before and after for each changed decision."
+          }
+        }
+      ]
+    }
+  }
+}
